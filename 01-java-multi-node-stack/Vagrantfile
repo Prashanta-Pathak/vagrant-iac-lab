@@ -1,0 +1,63 @@
+# Java-App-IAC-Vagrant-File.
+
+
+Vagrant.configure("2") do |config|
+  config.hostmanager.enebled = true
+  config.hostmanager.manage_host = true
+  
+
+  # Database vm............. 
+  config.vm.define "database" do |database|
+    database.vm.box ="bento/fedora-42"
+    database.vm.box_version ="202510.26.0"
+    database.vm.hostname ="MySql-Database"
+    database.vm.network "private_network", ip:"192.168.56.15"
+    database.vm.provider "virtualbox" do |vb|
+      vb.memory ="1024"
+    end
+  end
+
+  # Memcache vm................
+  config.vm.define "mamcache" do |mamcache|
+    mamcache.vm.box ="bento/fedora-42"
+    mamcache.vm.box_version ="202510.26.0"
+    mamcache.vm.hostname ="Memcache"
+    mamcache.vm.network "private_network", ip:"192.168.56.16"
+    mamcache.vm.provider "virtualbox" do |vb|
+      vb.memory ="1024"
+    end
+  end
+
+  # Rabbitmq vm.............
+  config.vm.define "rabbitmq" do |rabbitmq|
+    rabbitmq.vm.box ="bento/fedora-42"
+    rabbitmq.vm.box_version ="202510.26.0"
+    rabbitmq.vm.hostname ="Rabbitmq"
+    rabbitmq.vm.network "private_network", ip:"192.168.56.17"
+    rabbitmq.vm.provider "virtualbox" do |vb|
+      vb.memory ="1024"
+    end
+  end
+
+  # Tomcat vm................
+  config.vm.define "tomcat" do |tomcat|
+    tomcat.vm.box ="bento/fedora-42"
+    tomcat.vm.box_version ="202510.26.0"
+    tomcat.vm.hostname ="Tomcat"
+    tomcat.vm.network "private_network", ip:"192.168.56.18"
+    tomcat.vm.provider "virtualbox" do |vb|
+      vb.memory ="1024"
+    end
+  end
+
+  #Nginx vm...........................
+  config.vm.define "nginx" do |nginx|
+    nginx.vm.box ="luminositylabsllc/bento-ubuntu-26.04-arm64"
+    nginx.vm.box_version ="20260603.01"
+    nginx.vm.hostname ="Nginx"
+    nginx.vm.network "private_network", ip:"192.168.56.19"
+    nginx.vm.provider "virtualbox" do |vb|
+      vb.memory ="1024"
+    end
+  end
+end
